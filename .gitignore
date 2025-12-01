@@ -1,0 +1,6 @@
+build
+.idea
+.vscode
+debug
+vendor
+.DS_Store
