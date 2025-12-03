@@ -8,27 +8,27 @@ import (
 	"github.com/springmove/tp/src/services/gorm"
 )
 
-var ServiceEcho base.IServiceEcho
-var ServiceGoRedis base.IServiceGoRedis
-var ServiceGorm base.IServiceGorm
-
-type Services struct {
+type TP struct {
 	sptty.IServices
+
+	ServiceEcho    base.IServiceEcho
+	ServiceGoRedis base.IServiceGoRedis
+	ServiceGorm    base.IServiceGorm
 }
 
-func (s *Services) Services() sptty.Services {
-	ServiceEcho = &echo.Service{}
-	ServiceGoRedis = &goredis.Service{}
-	ServiceGorm = &gorm.Service{}
+func (s *TP) Services() sptty.Services {
+	s.ServiceEcho = &echo.Service{}
+	s.ServiceGoRedis = &goredis.Service{}
+	s.ServiceGorm = &gorm.Service{}
 
 	return sptty.Services{
-		ServiceEcho.(sptty.IService),
-		ServiceGoRedis.(sptty.IService),
-		ServiceGorm.(sptty.IService),
+		s.ServiceEcho.(sptty.IService),
+		s.ServiceGoRedis.(sptty.IService),
+		s.ServiceGorm.(sptty.IService),
 	}
 }
 
-func (s *Services) Configs() sptty.Configs {
+func (s *TP) Configs() sptty.Configs {
 	return sptty.Configs{
 		&echo.Config{},
 		&goredis.Config{},
