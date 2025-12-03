@@ -12,7 +12,7 @@ type Service struct {
 	sptty.BaseService
 
 	cfg Config
-	e   *v4.Echo
+	srv *v4.Echo
 }
 
 func (s *Service) ServiceName() string {
@@ -41,9 +41,9 @@ func (s *Service) Init(app sptty.ISptty) error {
 }
 
 func (s *Service) Srv() *v4.Echo {
-	if s.e == nil {
-		s.e = v4.New()
+	if s.srv == nil {
+		s.srv = v4.New()
 	}
 
-	return s.e
+	return s.srv
 }
