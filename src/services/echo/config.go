@@ -6,7 +6,7 @@ import (
 )
 
 type Config struct {
-	sptty.BaseConfig
+	sptty.BaseConfig `yaml:",inline"`
 
 	Port string `yaml:"Port"`
 }

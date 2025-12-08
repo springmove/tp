@@ -19,7 +19,7 @@ type DBConfig struct {
 }
 
 type Config struct {
-	sptty.BaseConfig
+	sptty.BaseConfig `yaml:",inline"`
 
 	Configs []DBConfig `yaml:"Configs"`
 }

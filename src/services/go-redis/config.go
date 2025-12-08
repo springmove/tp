@@ -14,7 +14,7 @@ type RedisEntry struct {
 }
 
 type Config struct {
-	sptty.BaseConfig
+	sptty.BaseConfig `yaml:",inline"`
 
 	Configs []RedisEntry `yaml:"Configs"`
 }
