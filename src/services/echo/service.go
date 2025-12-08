@@ -30,14 +30,14 @@ func (s *Service) Init(app sptty.ISptty) error {
 		return nil
 	}
 
-	s.showRoutes()
-
 	go func() {
 		if err := s.Srv().Start(s.cfg.Port); err != nil {
 			sptty.Log(sptty.ErrorLevel, fmt.Sprintf("Echo Server Err: %s", err.Error()), s.ServiceName())
 			return
 		}
 	}()
+
+	s.showRoutes()
 
 	return nil
 }
@@ -51,7 +51,7 @@ func (s *Service) Srv() *v4.Echo {
 }
 
 func (s *Service) showRoutes() {
-	routes := s.srv.Routes()
+	routes := s.Srv().Routes()
 	for _, v := range routes {
 		fmt.Printf("%s %s\n", v.Method, v.Path)
 	}
