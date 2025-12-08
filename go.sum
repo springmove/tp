@@ -72,6 +72,8 @@ github.com/springmove/sptty v0.2.0 h1:Z5rmimAXCmGP6HTnNyXY724M3O4n6pGwOpnxInHfwY
 github.com/springmove/sptty v0.2.0/go.mod h1:GkpxqQgIeuyPH9WBv+SCI94EgS/51IShPSebD+ErNoM=
 github.com/springmove/sptty v0.2.1 h1:1L5s1Pg4LraVv2/F+hUUYImimMUOlMkZYeUfUpSW5XM=
 github.com/springmove/sptty v0.2.1/go.mod h1:GkpxqQgIeuyPH9WBv+SCI94EgS/51IShPSebD+ErNoM=
+github.com/springmove/sptty v0.2.2 h1:FYLPETVEQP3wvKmwOG9aFlvtFB5CYL7zDJpjw96d9GI=
+github.com/springmove/sptty v0.2.2/go.mod h1:GkpxqQgIeuyPH9WBv+SCI94EgS/51IShPSebD+ErNoM=
 github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=
 github.com/stretchr/objx v0.4.0/go.mod h1:YvHI0jy2hoMjB+UWwv71VJQ9isScKT/TqJzVSSt89Yw=
 github.com/stretchr/objx v0.5.0/go.mod h1:Yh+to48EsGEfYuaHDzXPcE3xhTkx73EhmCGUpEOglKo=

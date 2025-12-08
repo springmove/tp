@@ -6,6 +6,8 @@ const (
 	ServiceEcho = "echo"
 )
 
+var Echo IServiceEcho
+
 type IServiceEcho interface {
 	Srv() *echo.Echo
 }

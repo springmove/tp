@@ -7,7 +7,7 @@ toolchain go1.24.10
 require (
 	github.com/labstack/echo/v4 v4.13.4
 	github.com/redis/go-redis/v9 v9.7.0
-	github.com/springmove/sptty v0.2.1
+	github.com/springmove/sptty v0.2.2
 	gorm.io/driver/mysql v1.6.0
 	gorm.io/driver/postgres v1.6.0
 	gorm.io/gorm v1.31.1

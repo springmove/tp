@@ -15,6 +15,8 @@ type IClientContext interface {
 	Client() *redis.Client
 }
 
+var GoRedis IServiceGoRedis
+
 type IServiceGoRedis interface {
 	ClientContext(index ...int) IClientContext
 }
