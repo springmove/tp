@@ -5,6 +5,7 @@ go 1.24.0
 toolchain go1.24.10
 
 require (
+	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/labstack/echo/v4 v4.13.4
 	github.com/redis/go-redis/v9 v9.7.0
 	github.com/springmove/sptty v0.2.2
