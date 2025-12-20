@@ -10,6 +10,8 @@ const (
 	ErrTokenExpiry  = "ErrTokenExpiry"
 )
 
+var IJwt IServiceJwt
+
 type IServiceJwt interface {
 	Sign(claims jwt.MapClaims) (string, error)
 	Validate(token string) (jwt.MapClaims, error)

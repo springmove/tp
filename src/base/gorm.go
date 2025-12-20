@@ -15,7 +15,7 @@ const (
 	ErrTypeNotSupported = "ErrTypeNotSupported"
 )
 
-var Gorm IServiceGorm
+var IGorm IServiceGorm
 
 type IServiceGorm interface {
 	DB(index ...int) *gorm.DB
