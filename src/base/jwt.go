@@ -8,6 +8,8 @@ const (
 
 	ErrTokenInvalid = "ErrTokenInvalid"
 	ErrTokenExpiry  = "ErrTokenExpiry"
+
+	HeaderAuth = "Authorization"
 )
 
 var IJwt IServiceJwt
