@@ -1,6 +1,10 @@
 package base
 
-import "github.com/dgrijalva/jwt-go"
+import (
+	"time"
+
+	"github.com/dgrijalva/jwt-go"
+)
 
 const (
 	ServiceJwt        = "jwt"
@@ -19,4 +23,5 @@ type IServiceJwt interface {
 	Validate(token string) (jwt.MapClaims, error)
 	Refresh(token string) (string, error)
 	SetSecret(secret string)
+	Expiry() time.Duration
 }

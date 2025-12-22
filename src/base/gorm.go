@@ -24,6 +24,7 @@ var IGorm IServiceGorm
 
 type IServiceGorm interface {
 	DB(index ...int) *gorm.DB
+	AddModels(models []any, db ...*gorm.DB) error
 }
 
 type BaseModel struct {

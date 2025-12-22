@@ -92,3 +92,7 @@ func (s *Service) Refresh(token string) (string, error) {
 func (s *Service) SetSecret(secret string) {
 	s.secret = secret
 }
+
+func (s *Service) Expiry() time.Duration {
+	return s.cfg.Expiry
+}

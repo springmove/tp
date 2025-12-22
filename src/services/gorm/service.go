@@ -48,6 +48,20 @@ func (s *Service) DB(index ...int) *gorm.DB {
 	return s.dbs[targetDB]
 }
 
+func (s *Service) AddModels(models []any, db ...*gorm.DB) error {
+
+	targetDB := s.DB()
+	if len(db) > 0 {
+		targetDB = db[0]
+	}
+
+	if err := targetDB.AutoMigrate(models); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (s *Service) initDBs() error {
 	var db *gorm.DB
 	var err error
