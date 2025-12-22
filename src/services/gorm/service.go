@@ -55,7 +55,7 @@ func (s *Service) AddModels(models []any, db ...*gorm.DB) error {
 		targetDB = db[0]
 	}
 
-	if err := targetDB.AutoMigrate(models); err != nil {
+	if err := targetDB.AutoMigrate(models...); err != nil {
 		return err
 	}
 
