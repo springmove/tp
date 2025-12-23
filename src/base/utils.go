@@ -16,7 +16,7 @@ const (
 type IQuery interface {
 	FromCtx(ctx echo.Context)
 	loadDB(db *gorm.DB)
-	ToQuery(paging bool) *gorm.DB
+	ToQuery() *gorm.DB
 	ToURLQueryString() string
 }
 
@@ -26,6 +26,7 @@ type QueryBase struct {
 	db             *gorm.DB
 	urlQueryString string
 
+	Paging   bool
 	Page     int64
 	PageSize int64
 	IDs      []string
@@ -65,20 +66,18 @@ func (s *QueryBase) FromCtx(ctx echo.Context) {
 	s.PageSize = pageSize
 }
 
-func (s *QueryBase) ToQuery(paging bool) *gorm.DB {
-	q := s.db
-
-	q = q.Where("deleted = ?", false)
-
-	if s.PageSize == 0 {
-		s.PageSize = DefaultPageSize
-	}
+func (s *QueryBase) ToQuery() *gorm.DB {
+	q := s.db.Where("deleted = ?", false)
 
 	if len(s.IDs) > 0 {
 		q = q.Where("id in (?)", s.IDs)
 	}
 
-	if paging {
+	if s.Paging {
+		if s.PageSize == 0 {
+			s.PageSize = DefaultPageSize
+		}
+
 		q = q.Limit(int(s.PageSize)).Offset(int(s.Page * s.PageSize))
 	}
 
@@ -93,4 +92,16 @@ func CreateQueryFromContext(query IQuery, db *gorm.DB, ctx ...echo.Context) IQue
 	}
 
 	return query
+}
+
+func QueryModels[T IQuery, I any](query T) ([]I, error) {
+
+	models := []I{}
+
+	listQuery := query.ToQuery()
+	if err := listQuery.Find(&models).Error; err != nil {
+		return nil, err
+	}
+
+	return models, nil
 }
