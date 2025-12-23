@@ -68,7 +68,7 @@ func (s *QueryBase) FromCtx(ctx echo.Context) {
 func (s *QueryBase) ToQuery(paging bool) *gorm.DB {
 	q := s.db
 
-	q = q.Where("deleted_at <> ?", nil)
+	q = q.Where("deleted = ?", false)
 
 	if s.PageSize == 0 {
 		s.PageSize = DefaultPageSize

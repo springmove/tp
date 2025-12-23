@@ -52,3 +52,15 @@ func (s *BaseModel) Serialize() *BaseModel {
 
 	return s
 }
+
+type ISerialize[T any] interface {
+	Serialize() T
+}
+
+func SerializeModels[T ISerialize[T]](models []T) []T {
+	for k := range models {
+		models[k].Serialize()
+	}
+
+	return models
+}
