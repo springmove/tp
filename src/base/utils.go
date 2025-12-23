@@ -84,7 +84,7 @@ func (s *QueryBase) ToQuery() *gorm.DB {
 	return q
 }
 
-func CreateQueryFromContext(query IQuery, db *gorm.DB, ctx ...echo.Context) IQuery {
+func CreateQueryFromContext[T IQuery](query T, db *gorm.DB, ctx ...echo.Context) T {
 	query.loadDB(db)
 
 	if len(ctx) > 0 {
@@ -94,7 +94,7 @@ func CreateQueryFromContext(query IQuery, db *gorm.DB, ctx ...echo.Context) IQue
 	return query
 }
 
-func QueryModels[T IQuery, I any](query T) ([]I, error) {
+func QueryModels[T IQuery, I ISerialize[I]](query T) ([]I, error) {
 
 	models := []I{}
 
@@ -103,5 +103,5 @@ func QueryModels[T IQuery, I any](query T) ([]I, error) {
 		return nil, err
 	}
 
-	return models, nil
+	return SerializeModels(models), nil
 }
