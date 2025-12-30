@@ -96,7 +96,7 @@ func CreateQueryFromContext[T IQuery](query T, db *gorm.DB, ctx ...echo.Context)
 	return query
 }
 
-func QueryModels[T IQuery, I ISerialize[I]](query T) ([]I, error) {
+func QueryModels[I ISerialize[I]](query IQuery) ([]I, error) {
 
 	models := []I{}
 
