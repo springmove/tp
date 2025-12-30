@@ -14,7 +14,7 @@ const (
 )
 
 type IQuery interface {
-	FromCtx(ctx echo.Context)
+	FromCtx(ctx echo.Context) IQuery
 	loadDB(db *gorm.DB)
 	ToQuery() *gorm.DB
 	ToURLQueryString() string
@@ -45,7 +45,7 @@ func (s *QueryBase) loadDB(db *gorm.DB) {
 	s.db = db
 }
 
-func (s *QueryBase) FromCtx(ctx echo.Context) {
+func (s *QueryBase) FromCtx(ctx echo.Context) IQuery {
 	ids := ctx.QueryParam("IDs")
 	if ids != "" {
 		s.IDs = strings.Split(ids, ",")
@@ -64,6 +64,8 @@ func (s *QueryBase) FromCtx(ctx echo.Context) {
 	}
 
 	s.PageSize = pageSize
+
+	return s
 }
 
 func (s *QueryBase) ToQuery() *gorm.DB {

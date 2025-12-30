@@ -8,7 +8,8 @@ require (
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/labstack/echo/v4 v4.13.4
 	github.com/redis/go-redis/v9 v9.7.0
-	github.com/springmove/sptty v0.2.2
+	github.com/springmove/sptty v0.2.3
+	gopkg.in/resty.v1 v1.12.0
 	gorm.io/driver/mysql v1.6.0
 	gorm.io/driver/postgres v1.6.0
 	gorm.io/gorm v1.31.1
