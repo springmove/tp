@@ -6,13 +6,15 @@ import (
 )
 
 type WechatConfig struct {
+	sptty.BaseConfig
+
 	Type   string `yaml:"Type"`
 	AppID  string `yaml:"AppID"`
 	Secret string `yaml:"Secret"`
 }
 
 type Config struct {
-	sptty.BaseConfig
+	sptty.BaseConfig `yaml:",inline"`
 
 	Configs []WechatConfig `yaml:"Configs"`
 }

@@ -8,7 +8,7 @@ import (
 )
 
 type Config struct {
-	sptty.BaseConfig
+	sptty.BaseConfig `yaml:",inline"`
 
 	Expiry time.Duration `yaml:"Expiry"`
 }
