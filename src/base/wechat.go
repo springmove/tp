@@ -18,6 +18,7 @@ type IServiceWechat interface {
 
 type IWechatClient interface {
 	Code2Session(req *ReqCode2Session) (*RespCode2Session, error)
+	GetMobileByAuthCode(authCodeMobile string) (string, error)
 }
 
 type Resp struct {

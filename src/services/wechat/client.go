@@ -52,3 +52,55 @@ func (s *wechatClient) Code2Session(req *base.ReqCode2Session) (*base.RespCode2S
 
 	return &respBody, nil
 }
+
+func (s *wechatClient) GetMobileByAuthCode(authCodeMobile string) (string, error) {
+	if authCodeMobile == "" {
+		return "", nil
+	}
+
+	accessToken, err := s.getAccessToken()
+	if err != nil {
+		return "", err
+	}
+
+	url := fmt.Sprintf("https://api.weixin.qq.com/wxa/business/getuserphonenumber?access_token=%s", accessToken.Token)
+	resp, err := s.http.R().SetBody(&ReqMiniProgramAuthMobile{
+		Code: authCodeMobile,
+	}).Post(url)
+	if err != nil {
+		return "", err
+	}
+
+	respBody := RespMiniProgramAuthMobile{}
+	if err = json.Unmarshal(resp.Body(), &respBody); err != nil {
+		return "", err
+	}
+
+	if respBody.ErrCode != base.WxOK {
+		return "", fmt.Errorf("ErrCode: %d, ErrMsg: %s", respBody.ErrCode, respBody.ErrMsg)
+	}
+
+	return respBody.Mobile.Mobile, nil
+}
+
+func (s *wechatClient) getAccessToken() (*RespAccessToken, error) {
+	url := fmt.Sprintf("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=%s&secret=%s",
+		s.cfg.AppID,
+		s.cfg.Secret)
+
+	resp, err := s.http.R().Get(url)
+	if err != nil {
+		return nil, err
+	}
+
+	rt := RespAccessToken{}
+	if err = json.Unmarshal(resp.Body(), &rt); err != nil {
+		return nil, err
+	}
+
+	if rt.ErrCode != base.WxOK {
+		return nil, fmt.Errorf("ErrCode: %d, ErrMsg: %s", rt.ErrCode, rt.ErrMsg)
+	}
+
+	return &rt, nil
+}
