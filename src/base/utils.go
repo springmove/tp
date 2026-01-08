@@ -135,3 +135,16 @@ func CreateModel(model any, db ...*gorm.DB) error {
 
 	return nil
 }
+
+func SoftDeleteModels(model any, ids []string, db ...*gorm.DB) error {
+	targetDB, err := getDB(db...)
+	if err != nil {
+		return err
+	}
+
+	if err := targetDB.Model(model).Where("id in ?", ids).Update("deleted", true).Error; err != nil {
+		return err
+	}
+
+	return nil
+}
