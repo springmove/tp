@@ -107,3 +107,31 @@ func QueryModels[I ISerialize[I]](query IQuery) ([]I, error) {
 
 	return SerializeModels(models), nil
 }
+
+func getDB(db ...*gorm.DB) (*gorm.DB, error) {
+	var targetDB *gorm.DB
+	if len(db) > 0 {
+		targetDB = db[0]
+	} else {
+		if IGorm == nil || IGorm.DB() == nil {
+			return nil, fmt.Errorf(ErrDBInvalid)
+		}
+
+		targetDB = IGorm.DB()
+	}
+
+	return targetDB, nil
+}
+
+func CreateModel(model any, db ...*gorm.DB) error {
+	targetDB, err := getDB(db...)
+	if err != nil {
+		return err
+	}
+
+	if err := targetDB.Create(model).Error; err != nil {
+		return err
+	}
+
+	return nil
+}

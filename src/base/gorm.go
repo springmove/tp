@@ -17,6 +17,7 @@ const (
 )
 
 const (
+	ErrDBInvalid        = "ErrDBInvalid"
 	ErrTypeNotSupported = "ErrTypeNotSupported"
 )
 
