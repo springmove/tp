@@ -10,6 +10,11 @@ const (
 	WxOK = 0
 )
 
+const (
+	BotMsgTypeText     = "text"
+	BotMsgTypeMarkdown = "markdown"
+)
+
 var IWechat IServiceWechat
 
 type IServiceWechat interface {
