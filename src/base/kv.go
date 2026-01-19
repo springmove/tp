@@ -19,6 +19,7 @@ type IServiceKV interface {
 	SetAdminToken(token string)
 	GetValueByKey(key string) (*KV, error)
 	UpdateKVCache(token string) error
+	SetTag(tag string)
 }
 
 type KV struct {

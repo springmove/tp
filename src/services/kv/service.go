@@ -15,6 +15,8 @@ type Service struct {
 	kv base.IClientContext
 
 	adminToken string
+
+	tag string
 }
 
 func (s *Service) Init(app sptty.ISptty) error {
@@ -40,16 +42,20 @@ func (s *Service) Init(app sptty.ISptty) error {
 	}
 
 	// 查询kv
-	base.IEcho.Srv().GET("/kv", s.routeGetKV)
+	base.IEcho.Srv().GET(fmt.Sprintf("%s/kv", s.tag), s.routeGetKV)
 
 	// 更新kv缓存（后台操作）
-	base.IEcho.Srv().POST("/kv-cache", s.routePostAdminKVCache)
+	base.IEcho.Srv().POST(fmt.Sprintf("%s/kv-cache", s.tag), s.routePostAdminKVCache)
 
 	return nil
 }
 
 func (s *Service) ServiceName() string {
 	return base.ServiceKV
+}
+
+func (s *Service) SetTag(tag string) {
+	s.tag = tag
 }
 
 func (s *Service) SetAdminToken(token string) {
