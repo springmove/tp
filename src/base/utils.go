@@ -26,6 +26,7 @@ type QueryBase struct {
 	db             *gorm.DB
 	urlQueryString string
 
+	Table    string
 	Paging   bool
 	Page     int64
 	PageSize int64
@@ -69,10 +70,15 @@ func (s *QueryBase) FromCtx(ctx echo.Context) IQuery {
 }
 
 func (s *QueryBase) ToQuery() *gorm.DB {
-	q := s.db.Where("deleted = ?", false)
+	t := ""
+	if s.Table != "" {
+		t = s.Table + "."
+	}
+
+	q := s.db.Where(fmt.Sprintf("%sdeleted = ?", t), false)
 
 	if len(s.IDs) > 0 {
-		q = q.Where("id in (?)", s.IDs)
+		q = q.Where(fmt.Sprintf("%sid in (?)", t), s.IDs)
 	}
 
 	if s.Paging {
