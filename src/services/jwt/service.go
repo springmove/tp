@@ -21,6 +21,11 @@ func (s *Service) Init(app sptty.ISptty) error {
 		return err
 	}
 
+	if !s.cfg.Enable {
+		sptty.Log(sptty.InfoLevel, "Service Disabled", s.ServiceName())
+		return nil
+	}
+
 	return nil
 }
 

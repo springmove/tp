@@ -21,7 +21,7 @@ func (s *Service) ServiceName() string {
 
 func (s *Service) Init(app sptty.ISptty) error {
 
-	if err := sptty.GetApp().GetConfig(s.ServiceName(), &s.cfg); err != nil {
+	if err := app.GetConfig(s.ServiceName(), &s.cfg); err != nil {
 		return err
 	}
 
